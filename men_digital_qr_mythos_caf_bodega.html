@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MYTHOS | Café & Bodega - Menú Digital</title>
+    
+    <!-- Google Fonts: Cormorant Garamond (elegancia clásica) & Plus Jakarta Sans (minimalismo moderno) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Configuración personalizada de colores y fuentes de la marca Mythos -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        mythos: {
+                            cream: '#F9F6F0',      // Fondo principal crema suave
+                            creamDark: '#EFE9DD',  // Acento suave de bordes/fondos
+                            navy: '#102C3D',       // Azul petróleo / marino profundo
+                            navyLight: '#1B435B',  // Hover azul
+                            gold: '#B88A44',       // Dorado / bronce cálido
+                            goldLight: '#D4AC6E',  // Dorado claro
+                            border: '#EAE3D5',     // Bordes sutiles
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(16, 44, 61, 0.05)',
+                        'float': '0 10px 30px -5px rgba(16, 44, 61, 0.18)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Estilos mínimos auxiliares para ocultar scrollbars en píldoras y transiciones suaves -->
+    <style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        body {
+            background-color: #F2EDE4; /* Fondo exterior sutil en desktop */
+            color: #102C3D;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .mythos-logo {
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-mythos-gold/20 selection:text-mythos-navy">
+
+    <!-- Contenedor principal Mobile-First (centrado como app en pantallas grandes) -->
+    <div class="min-h-screen max-w-md mx-auto bg-mythos-cream shadow-2xl shadow-mythos-navy/10 relative flex flex-col justify-between border-x border-mythos-border/60">
+
+        <!-- ==================== HEADER MINIMALISTA DE MARCA ==================== -->
+        <header class="pt-8 pb-5 px-6 text-center bg-mythos-cream relative">
+            <!-- Badge superior sutil -->
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/80 border border-mythos-border text-[11px] font-medium tracking-wider uppercase text-mythos-navy/70 mb-4 shadow-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                Carta Digital • Precios Actualizados
+            </div>
+
+            <!-- Isotipo SVG Minimalista (Columna Griega + Granos de Café) -->
+            <div class="flex justify-center mb-2">
+                <!-- <svg class="w-14 h-14" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Logo Mythos">
+                    <path d="M22 22C18.6863 22 16 24.6863 16 28C16 30.7614 18.2386 33 21 33C23.2091 33 25 31.2091 25 29C25 27.3431 23.6569 26 22 26" stroke="#B88A44" stroke-width="2.6" stroke-linecap="round"/>
+                    <path d="M58 22C61.3137 22 64 24.6863 64 28C64 30.7614 61.7614 33 59 33C56.7909 33 55 31.2091 55 29C55 27.3431 56.3431 26 58 26" stroke="#B88A44" stroke-width="2.6" stroke-linecap="round"/>
+                    <line x1="22" y1="22" x2="58" y2="22" stroke="#B88A44" stroke-width="2.6" stroke-linecap="round"/>
+                    <line x1="25" y1="17" x2="55" y2="17" stroke="#B88A44" stroke-width="2.2" stroke-linecap="round"/>
+                    <line x1="30" y1="28" x2="30" y2="49" stroke="#B88A44" stroke-width="2.4" stroke-linecap="round"/>
+                    <line x1="36.5" y1="28" x2="36.5" y2="46" stroke="#B88A44" stroke-width="2.4" stroke-linecap="round"/>
+                    <line x1="43.5" y1="28" x2="43.5" y2="46" stroke="#B88A44" stroke-width="2.4" stroke-linecap="round"/>
+                    <line x1="50" y1="28" x2="50" y2="49" stroke="#B88A44" stroke-width="2.4" stroke-linecap="round"/>
+                    <path d="M23 48C19 52 20 60 26 64C32 68 38 65 39 60C32 58 27 53 23 48Z" fill="#B88A44"/>
+                    <path d="M53 47C45 48 40 55 42 63C44 68 51 69 57 64C62 59 61 50 53 47Z" fill="#102C3D"/>
+                    <path d="M55 49C51 54 50 60 47 66" stroke="#F9F6F0" stroke-width="1.8" stroke-linecap="round"/>
+                </svg> -->
+
+                <img src="./mythos-logo.jpg" class="mythos-logo">
+            </div>
+
+            <!-- Nombre de la Marca -->
+            <h1 class="font-serif text-4xl font-bold tracking-[0.14em] text-mythos-navy leading-none">
+                MYTHOS
+            </h1>
+            <p class="text-[11px] font-semibold tracking-[0.28em] text-mythos-gold uppercase mt-1.5">
+                Café • Quimilí
+            </p>
+            <p class="text-[11px] font-semibold tracking-[0.1em] mt-1.5">
+                Un café con historia
+            </p>
+
+            <!-- Enlace directo a Instagram -->
+            <div class="mt-4 flex justify-center">
+                <a href="https://www.instagram.com/mythos.cafe.25?srtk=MXJua3I0MGtnaTk5cQ==" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-mythos-border text-xs font-medium text-mythos-navy hover:border-mythos-gold hover:text-mythos-gold transition-all shadow-sm">
+                    <svg class="w-3.5 h-3.5 text-mythos-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                    <span>@mythos.cafe.25</span>
+                </a>
+            </div>
+        </header>
+
+        <!-- ==================== BARRA STICKY: BUSCADOR + CATEGORÍAS ==================== -->
+        <div class="sticky top-0 z-30 bg-mythos-cream/95 backdrop-blur-md border-b border-mythos-border/80 px-5 pt-3 pb-3.5 transition-all">
+            <!-- Buscador rápido -->
+            <div class="relative mb-3">
+                <svg class="w-4 h-4 text-mythos-navy/40 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                </svg>
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    placeholder="Buscar café, medialunas, tostados..." 
+                    class="w-full pl-10 pr-9 py-2.5 bg-white border border-mythos-border rounded-2xl text-sm text-mythos-navy placeholder-mythos-navy/40 focus:outline-none focus:border-mythos-gold focus:ring-2 focus:ring-mythos-gold/15 transition-all shadow-sm"
+                >
+                <button id="clearSearchBtn" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-mythos-navy/40 hover:text-mythos-navy p-1" aria-label="Limpiar búsqueda">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Pestañas / Pills de categorías deslizables -->
+            <nav id="categoryTabs" class="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5" aria-label="Categorías del menú">
+                <!-- Se renderizan dinámicamente desde JS -->
+            </nav>
+        </div>
+
+        <!-- ==================== CONTENIDO PRINCIPAL: LISTADO DE PRODUCTOS ==================== -->
+        <main class="flex-1 px-5 pt-5 pb-28">
+            <!-- Encabezado de sección activa -->
+            <div class="flex items-baseline justify-between mb-4">
+                <h2 id="currentCategoryTitle" class="font-serif text-2xl font-bold text-mythos-navy">
+                    Toda la Carta
+                </h2>
+                <span id="itemsCount" class="text-xs font-medium text-mythos-navy/50">
+                    12 productos
+                </span>
+            </div>
+
+            <!-- Contenedor de tarjetas de productos -->
+            <div id="menuContainer" class="space-y-3.5">
+                <!-- Las tarjetas se inyectan aquí mediante JavaScript -->
+            </div>
+
+            <!-- Estado vacío cuando no hay coincidencias de búsqueda -->
+            <div id="emptyState" class="hidden py-14 text-center">
+                <div class="w-12 h-12 rounded-full bg-white border border-mythos-border flex items-center justify-center mx-auto mb-3 text-mythos-gold">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                </div>
+                <p class="font-serif text-xl font-semibold text-mythos-navy">No encontramos ese producto</p>
+                <p class="text-xs text-mythos-navy/60 mt-1">Probá buscando con otra palabra o explorá todas las categorías.</p>
+                <button onclick="resetFilters()" class="mt-4 px-4 py-2 rounded-xl bg-mythos-navy text-white text-xs font-medium hover:bg-mythos-navyLight transition">
+                    Ver carta completa
+                </button>
+            </div>
+        </main>
+
+        <!-- ==================== FOOTER MINIMALISTA ==================== -->
+        <footer class="bg-mythos-navy text-mythos-cream px-6 pt-8 pb-28 rounded-t-3xl">
+            <div class="text-center border-b border-white/10 pb-6">
+                <p class="font-serif text-2xl font-semibold tracking-widest text-white">MYTHOS</p>
+                <p class="text-[11px] tracking-[0.22em] text-mythos-gold uppercase mt-0.5">Café</p>
+                <p class="text-xs text-white/70 mt-3 max-w-xs mx-auto leading-relaxed">
+                    Un rincón de encuentro, café de especialidad y sabores artesanales en el corazón de Quimilí.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 py-6 text-xs border-b border-white/10">
+                <div>
+                    <p class="text-mythos-gold font-semibold uppercase tracking-wider text-[10px] mb-1">Horarios</p>
+                    <p class="text-white/85">Lun a Sáb: 07:30 – 13:00</p>
+                    <p class="text-white/85">y 17:00 – 22:30 hs</p>
+                </div>
+                <div>
+                    <p class="text-mythos-gold font-semibold uppercase tracking-wider text-[10px] mb-1">Ubicación</p>
+                    <p class="text-white/85">Quimilí, Santiago del Estero</p>
+                    <a href="https://maps.app.goo.gl/WXntcq14EYar9jZ86" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-mythos-goldLight underline mt-0.5 hover:text-white">
+                        Ver en Google Maps →
+                    </a>
+                </div>
+            </div>
+
+            <div class="pt-5 flex items-center justify-between text-[11px] text-white/50">
+                <span>© 2026 Mythos Quimilí - Arka Digital</span>
+                <a href="https://www.instagram.com/mythos.cafe.25?srtk=MXJua3I0MGtnaTk5cQ==" target="_blank" rel="noopener noreferrer" class="text-white/80 hover:text-mythos-gold transition">
+                    Instagram @mythos.cafe.25
+                </a>
+            </div>
+        </footer>
+
+        <!-- ==================== BARRA FLOTANTE INFERIOR (MI PEDIDO / SELECCIÓN) ==================== -->
+        <div id="floatingOrderBar" class="fixed bottom-4 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-[416px] z-40 transition-all duration-300 translate-y-28 opacity-0 pointer-events-none">
+            <button onclick="openOrderSummaryModal()" class="w-full bg-mythos-navy hover:bg-mythos-navyLight text-white px-5 py-3.5 rounded-2xl shadow-float flex items-center justify-between border border-mythos-gold/30 transition-transform active:scale-[0.99]">
+                <div class="flex items-center gap-3">
+                    <span id="orderTotalCount" class="w-7 h-7 rounded-xl bg-mythos-gold text-mythos-navy font-bold text-xs flex items-center justify-center">
+                        0
+                    </span>
+                    <div class="text-left">
+                        <p class="text-xs font-semibold tracking-wide">Ver mi selección</p>
+                        <p class="text-[10px] text-white/70">Para pedir en mesa o WhatsApp</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span id="orderTotalPrice" class="font-bold text-sm text-mythos-goldLight">
+                        $ 0
+                    </span>
+                    <svg class="w-4 h-4 text-mythos-goldLight" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </div>
+            </button>
+        </div>
+
+    </div>
+
+    <!-- ==================== MODAL 1: DETALLE DE PRODUCTO ==================== -->
+    <div id="productModal" class="fixed inset-0 z-50 hidden items-end sm:items-center justify-center bg-mythos-navy/60 backdrop-blur-xs p-0 sm:p-4 transition-opacity">
+        <div class="bg-mythos-cream w-full max-w-md rounded-t-3xl sm:rounded-3xl overflow-hidden shadow-2xl border border-mythos-border transform transition-all max-h-[90vh] flex flex-col">
+            <!-- Imagen ampliada del producto -->
+            <div class="relative h-60 sm:h-64 bg-mythos-creamDark shrink-0">
+                <img id="modalProductImg" src="" alt="" class="w-full h-full object-cover">
+                <button onclick="closeProductModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/90 backdrop-blur-xs text-mythos-navy flex items-center justify-center shadow-md hover:bg-white transition" aria-label="Cerrar detalle">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+                <span id="modalProductBadge" class="hidden absolute bottom-3 left-4 px-3 py-1 rounded-full bg-mythos-navy/90 text-mythos-goldLight text-[11px] font-semibold tracking-wide">
+                </span>
+            </div>
+
+            <!-- Información detallada -->
+            <div class="p-6 overflow-y-auto flex-1">
+                <div class="flex items-start justify-between gap-4">
+                    <div>
+                        <p id="modalProductCategory" class="text-[11px] font-semibold uppercase tracking-widest text-mythos-gold mb-1"></p>
+                        <h3 id="modalProductName" class="font-serif text-2xl font-bold text-mythos-navy leading-tight"></h3>
+                    </div>
+                    <p id="modalProductPrice" class="text-xl font-bold text-mythos-navy whitespace-nowrap"></p>
+                </div>
+
+                <p id="modalProductDesc" class="text-sm text-mythos-navy/75 leading-relaxed mt-3"></p>
+
+                <!-- Nota opcional para el mozo/barista -->
+                <div class="mt-5">
+                    <label for="modalProductNote" class="block text-xs font-semibold text-mythos-navy mb-1.5">
+                        Preferencia o aclaración (opcional)
+                    </label>
+                    <input 
+                        type="text" 
+                        id="modalProductNote" 
+                        placeholder="Ej: Sin azúcar, leche deslactosada, bien caliente..." 
+                        class="w-full px-3.5 py-2.5 bg-white border border-mythos-border rounded-xl text-xs text-mythos-navy placeholder-mythos-navy/40 focus:outline-none focus:border-mythos-gold"
+                    >
+                </div>
+            </div>
+
+            <!-- Footer de acción del modal -->
+            <div class="p-4 bg-white border-t border-mythos-border flex items-center gap-3 shrink-0">
+                <!-- Selector de cantidad -->
+                <div class="flex items-center bg-mythos-cream rounded-xl border border-mythos-border p-1">
+                    <button onclick="changeModalQty(-1)" class="w-8 h-8 rounded-lg flex items-center justify-center text-mythos-navy font-bold hover:bg-white transition">-</button>
+                    <span id="modalQtyValue" class="w-8 text-center text-sm font-bold text-mythos-navy">1</span>
+                    <button onclick="changeModalQty(1)" class="w-8 h-8 rounded-lg flex items-center justify-center text-mythos-navy font-bold hover:bg-white transition">+</button>
+                </div>
+
+                <!-- Botón agregar -->
+                <button onclick="confirmAddFromModal()" class="flex-1 bg-mythos-navy hover:bg-mythos-navyLight text-white font-semibold text-sm py-3 px-4 rounded-xl transition flex items-center justify-center gap-2 shadow-sm">
+                    <span>Agregar</span>
+                    <span id="modalBtnSubtotal" class="text-mythos-goldLight font-bold"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== MODAL 2: RESUMEN DE SELECCIÓN / PEDIDO ==================== -->
+    <div id="orderSummaryModal" class="fixed inset-0 z-50 hidden items-end sm:items-center justify-center bg-mythos-navy/60 backdrop-blur-xs p-0 sm:p-4">
+        <div class="bg-mythos-cream w-full max-w-md rounded-t-3xl sm:rounded-3xl overflow-hidden shadow-2xl border border-mythos-border max-h-[88vh] flex flex-col">
+            <!-- Header del resumen -->
+            <div class="px-6 py-4 bg-white border-b border-mythos-border flex items-center justify-between">
+                <div>
+                    <h3 class="font-serif text-2xl font-bold text-mythos-navy">Mi Selección</h3>
+                    <p class="text-xs text-mythos-navy/60">Mostrá este resumen al mozo o envialo por WhatsApp</p>
+                </div>
+                <button onclick="closeOrderSummaryModal()" class="w-8 h-8 rounded-full bg-mythos-cream text-mythos-navy flex items-center justify-center hover:bg-mythos-creamDark transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Lista de ítems agregados -->
+            <div id="orderItemsList" class="p-6 overflow-y-auto flex-1 space-y-3">
+                <!-- Items renderizados por JS -->
+            </div>
+
+            <!-- Total y botones de acción -->
+            <div class="p-5 bg-white border-t border-mythos-border space-y-3">
+                <div class="flex items-center justify-between text-base font-bold text-mythos-navy">
+                    <span>Total estimado</span>
+                    <span id="summaryModalTotal" class="text-xl text-mythos-gold"></span>
+                </div>
+
+                <div class="grid grid-cols-1 gap-2.5 pt-1">
+                    <button onclick="sendOrderViaWhatsApp()" class="w-full py-3 px-4 rounded-xl bg-mythos-navy hover:bg-mythos-navyLight text-white text-sm font-semibold flex items-center justify-center gap-2 transition shadow-sm">
+                        <svg class="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/>
+                        </svg>
+                        <span>Enviar pedido por WhatsApp</span>
+                    </button>
+                    <button onclick="clearOrder()" class="w-full py-2 text-xs font-medium text-mythos-navy/50 hover:text-red-600 transition">
+                        Vaciar selección
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast discreto de confirmación -->
+    <div id="toastNotification" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 bg-mythos-navy text-white text-xs font-medium px-4 py-2.5 rounded-full shadow-lg border border-mythos-gold/40 opacity-0 pointer-events-none transition-all duration-300 -translate-y-4">
+        Agregado a tu selección
+    </div>
+
+    <!-- ==================== LÓGICA JAVASCRIPT MODULAR ==================== -->
+    <script>
+        // 1. BASE DE DATOS DE PRODUCTOS DE MYTHOS CAFÉ & BODEGA (Precios actualizados en ARS)
+        const CATEGORIES = [
+            { id: 'all', label: 'Todos' },
+            { id: 'cafeteria', label: 'Cafetería' },
+            { id: 'pasteleria', label: 'Pastelería' },
+            { id: 'salados', label: 'Salados' },
+            { id: 'bodega', label: 'Bodega & Bebidas' }
+        ];
+
+        const MENU_ITEMS = [
+            {
+                id: 1,
+                category: 'cafeteria',
+                categoryLabel: 'Cafetería',
+                name: 'Capuchino Mythos',
+                shortDesc: 'Espresso doble intenso, leche texturizada cremosa, cacao amargo y toque de canela.',
+                fullDesc: 'Nuestra insignia de la casa. Preparado con granos seleccionados de tueste medio, doble shot de espresso, espuma de leche sedosa y un espolvoreado artesanal de cacao puro y canela en rama.',
+                price: 3400,
+                badge: 'Especialidad',
+                image: 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?auto=format&fit=crop&w=600&q=80'
+            },
+            {
+                id: 2,
+                category: 'cafeteria',
+                categoryLabel: 'Cafetería',
+                name: 'Latte Vainilla & Caramelo',
+                shortDesc: 'Café espresso suave con leche vaporizada y almíbar artesanal de vainilla natural.',
+                fullDesc: 'Equilibrio perfecto entre la intensidad del café recién molido y la dulzura sutil de nuestro almíbar casero de vainilla de Madagascar con un toque de caramelo.',
+                price: 3600,
+                badge: '',
+                image: 'https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=600&q=80'
+            },
+            {
+                id: 3,
+                category: 'cafeteria',
+                categoryLabel: 'Cafetería',
+                name: 'Flat White de Autor',
+                shortDesc: 'Doble ristretto con microespuma fina de leche entera para un sabor profundo.',
+                fullDesc: 'Ideal para los amantes del café intenso. Dos cargas de ristretto extraídas al momento coronadas con una capa delgada y brillante de leche microespumada.',
+                price: 3300,
+                badge: 'Recomendado',
+                image: 'https://images.unsplash.com/photo-1577968897966-3d4325b36b61?auto=format&fit=crop&w=600&q=80'
+            },
+            {
+                id: 4,
+                category: 'cafeteria',
+                categoryLabel: 'Cafetería',
+                name: 'Iced Latte & Cold Brew',
+                shortDesc: 'Extracción en frío de 16 horas servida sobre hielo cristalino y leche fría.',
+                fullDesc: 'Refrescante, suave y de baja acidez. Macerado lentamente en frío para resaltar notas achocolatadas y de frutos secos, ideal para las tardes cálidas de Quimilí.',
+                price: 3800,
+                badge: 'Frío',
+                image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=600&q=80'
+            },
+            {
+                id: 5,
+                category: 'pasteleria',
+                categoryLabel: 'Pastelería',
+                name: 'Medialunas de Manteca (x2)',
+                shortDesc: 'Hojaldradas, doradas al horno y pinceladas con almíbar suave de naranja.',
+                fullDesc: 'Elaboradas diariamente con manteca de primera calidad y fermentación lenta de 24 horas. Tibias, tiernas por dentro y levemente crocantes por fuera.',
+                price: 2400,
+                badge: 'Clásico',
+                image: 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=600&q=80'
+            },
+            {
+                id: 6,
+                category: 'pasteleria',
+                categoryLabel: 'Pastelería',
+                name: 'Cheesecake de Frutos Rojos',
+                shortDesc: 'Base crocante de galletas, crema suave de queso y reducción casera de frutos del bosque.',
+                fullDesc: 'Porción generosa de cheesecake estilo New York con textura aterciopelada, cubierto con salsa artesanal de frambuesas, arándanos y frutillas.',
+                price: 4500,
+                badge: 'Especialidad',
+                image: 'https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=600&q=80'
+            },
+            {
+                id: 7,
+                category: 'pasteleria',
+                categoryLabel: 'Pastelería',
+                name: 'Brownie Tibio con Nueces',
+                shortDesc: 'Chocolate semiamargo 70% cacao con nueces tostadas y centro húmedo.',
+                fullDesc: 'Intenso brownie de chocolate belga con trozos de nuez mariposa. Podés pedirlo tibio para disfrutar toda su cremosidad.',
+                price: 3900,
+                badge: 'Sin TACC (Opción)',
+                image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=80'
+            },
+            {
+                id: 8,
+                category: 'salados',
+                categoryLabel: 'Salados',
+                name: 'Tostado Mythos en Pan de Campo',
+                shortDesc: 'Pan artesanal de masa madre, jamón cocido natural, queso tybo fundido y manteca.',
+                fullDesc: 'Dos rebanadas gruesas de nuestro pan de campo dorado a la plancha con abundante queso fundido y jamón seleccionado. Acompañado con dip de queso crema y ciboulette.',
+                price: 5200,
+                badge: 'Más pedido',
+                image: 'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=600&q=80'
+            },
+            {
+                id: 9,
+                category: 'salados',
+                categoryLabel: 'Salados',
+                name: 'Avocado Toast & Huevo Poché',
+                shortDesc: 'Pan integral con semillas, palta cremosa, huevo poché, tomates cherry y oliva.',
+                fullDesc: 'Tostón de masa madre con semillas de sésamo y girasol, puré de palta condimentado con lima, huevo a baja temperatura y escamas de sal marina.',
+                price: 5800,
+                badge: 'Saludable',
+                image: 'https://images.unsplash.com/photo-1525351484163-7529414342d8?auto=format&fit=crop&w=600&q=80'
+            },
+            {
+                id: 10,
+                category: 'salados',
+                categoryLabel: 'Salados',
+                name: 'Croissant Relleno Crudo & Rúcula',
+                shortDesc: 'Croissant artesanal hojaldrado con jamón crudo estacionado, queso brie y rúcula fresca.',
+                fullDesc: 'Crujiente croissant de manteca relleno con finas fetas de jamón crudo, queso brie suave, hojas de rúcula hidropónica y un toque de reducción de aceto.',
+                price: 5600,
+                badge: '',
+                image: 'https://images.unsplash.com/photo-1623334044303-241021148842?auto=format&fit=crop&w=600&q=80'
+            },
+            {
+                id: 11,
+                category: 'bodega',
+                categoryLabel: 'Bodega & Bebidas',
+                name: 'Copa Malbec Reserva (Bodega)',
+                shortDesc: 'Vino tinto de cuerpo medio con notas de ciruela madura, vainilla y roble.',
+                fullDesc: 'Selección de nuestra cava. Servido a temperatura ideal (16°C) en copa de cristal, perfecto para acompañar nuestras tablas y salados de la tarde-noche.',
+                price: 4200,
+                badge: 'Bodega',
+                image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=600&q=80'
+            },
+            {
+                id: 12,
+                category: 'bodega',
+                categoryLabel: 'Bodega & Bebidas',
+                name: 'Limonada con Menta y Jengibre',
+                shortDesc: 'Jugo de limones recién exprimidos, hojas de menta fresca, jengibre y hielo frappé.',
+                fullDesc: 'Jarra individual súper fresca preparada en el momento con limones naturales, toque cítrico de jengibre y menta de huerta.',
+                price: 3100,
+                badge: 'Natural',
+                image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=600&q=80'
+            }
+        ];
+
+        // 2. ESTADO DE LA APLICACIÓN
+        let activeCategory = 'all';
+        let searchQuery = '';
+        let cart = []; // Array de { uid, product, qty, note }
+        let selectedModalProduct = null;
+        let selectedModalQty = 1;
+
+        // Formateador de moneda ARS ($ 3.400)
+        const formatPrice = (amount) => {
+            return '$ ' + amount.toLocaleString('es-AR');
+        };
+
+        // 3. RENDERIZADO DE PESTAÑAS DE CATEGORÍAS
+        function renderCategoryTabs() {
+            const container = document.getElementById('categoryTabs');
+            container.innerHTML = CATEGORIES.map(cat => {
+                const isActive = cat.id === activeCategory;
+                return `
+                    <button 
+                        onclick="selectCategory('${cat.id}')"
+                        class="px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
+                            isActive 
+                            ? 'bg-mythos-navy text-white shadow-sm' 
+                            : 'bg-white text-mythos-navy/70 border border-mythos-border hover:border-mythos-gold/60 hover:text-mythos-navy'
+                        }">
+                        ${cat.label}
+                    </button>
+                `;
+            }).join('');
+        }
+
+        // 4. RENDERIZADO DE TARJETAS DE PRODUCTOS
+        function renderMenu() {
+            const container = document.getElementById('menuContainer');
+            const emptyState = document.getElementById('emptyState');
+            const titleEl = document.getElementById('currentCategoryTitle');
+            const countEl = document.getElementById('itemsCount');
+
+            // Filtrar por categoría y búsqueda
+            const filtered = MENU_ITEMS.filter(item => {
+                const matchesCat = activeCategory === 'all' || item.category === activeCategory;
+                const q = searchQuery.toLowerCase().trim();
+                const matchesSearch = !q || 
+                    item.name.toLowerCase().includes(q) || 
+                    item.shortDesc.toLowerCase().includes(q) ||
+                    item.categoryLabel.toLowerCase().includes(q);
+                return matchesCat && matchesSearch;
+            });
+
+            // Actualizar título y contador
+            const currentCatObj = CATEGORIES.find(c => c.id === activeCategory);
+            titleEl.textContent = searchQuery ? 'Resultados de búsqueda' : (activeCategory === 'all' ? 'Toda la Carta' : currentCatObj.label);
+            countEl.textContent = `${filtered.length} ${filtered.length === 1 ? 'opción' : 'opciones'}`;
+
+            if (filtered.length === 0) {
+                container.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            container.innerHTML = filtered.map(item => `
+                <article 
+                    onclick="openProductModal(${item.id})"
+                    class="group bg-white rounded-2xl p-3 border border-mythos-border shadow-soft hover:border-mythos-gold/60 transition-all cursor-pointer flex items-center gap-3.5 active:scale-[0.99]">
+                    
+                    <!-- Miniatura del producto -->
+                    <div class="w-24 h-24 rounded-xl overflow-hidden bg-mythos-creamDark shrink-0 relative">
+                        <img 
+                            src="${item.image}" 
+                            alt="${item.name}" 
+                            loading="lazy"
+                            onerror="this.src='https://placehold.co/300x300/F9F6F0/102C3D?text=MYTHOS'"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        >
+                        ${item.badge ? `
+                            <span class="absolute top-1.5 left-1.5 px-2 py-0.5 rounded-md bg-mythos-navy/85 backdrop-blur-xs text-[9px] font-semibold text-mythos-goldLight tracking-wide">
+                                ${item.badge}
+                            </span>
+                        ` : ''}
+                    </div>
+
+                    <!-- Información y precio -->
+                    <div class="flex-1 min-w-0 flex flex-col justify-between self-stretch py-0.5">
+                        <div>
+                            <h3 class="font-serif text-lg font-bold text-mythos-navy leading-snug truncate">
+                                ${item.name}
+                            </h3>
+                            <p class="text-xs text-mythos-navy/65 line-clamp-2 mt-0.5 leading-relaxed">
+                                ${item.shortDesc}
+                            </p>
+                        </div>
+
+                        <div class="flex items-center justify-between mt-2.5 pt-1.5 border-t border-mythos-cream">
+                            <span class="font-bold text-sm text-mythos-navy">
+                                ${formatPrice(item.price)}
+                            </span>
+
+                            <!-- Botón rápido '+' para agregar sin abrir modal -->
+                            <button 
+                                onclick="event.stopPropagation(); quickAddToCart(${item.id})"
+                                aria-label="Agregar ${item.name}"
+                                class="w-8 h-8 rounded-xl bg-mythos-cream hover:bg-mythos-navy text-mythos-navy hover:text-white border border-mythos-border flex items-center justify-center transition-colors shadow-2xs">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M12 4v16m8-8H4"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        // 5. ACCIONES DE FILTRADO Y BÚSQUEDA
+        function selectCategory(catId) {
+            activeCategory = catId;
+            renderCategoryTabs();
+            renderMenu();
+        }
+
+        function resetFilters() {
+            activeCategory = 'all';
+            searchQuery = '';
+            document.getElementById('searchInput').value = '';
+            document.getElementById('clearSearchBtn').classList.add('hidden');
+            renderCategoryTabs();
+            renderMenu();
+        }
+
+        // Eventos del buscador
+        const searchInput = document.getElementById('searchInput');
+        const clearSearchBtn = document.getElementById('clearSearchBtn');
+
+        searchInput.addEventListener('input', (e) => {
+            searchQuery = e.target.value;
+            if (searchQuery.length > 0) {
+                clearSearchBtn.classList.remove('hidden');
+            } else {
+                clearSearchBtn.classList.add('hidden');
+            }
+            renderMenu();
+        });
+
+        clearSearchBtn.addEventListener('click', () => {
+            searchQuery = '';
+            searchInput.value = '';
+            clearSearchBtn.classList.add('hidden');
+            renderMenu();
+        });
+
+        // 6. MODAL DE DETALLE DE PRODUCTO
+        function openProductModal(productId) {
+            const product = MENU_ITEMS.find(p => p.id === productId);
+            if (!product) return;
+
+            selectedModalProduct = product;
+            selectedModalQty = 1;
+
+            document.getElementById('modalProductImg').src = product.image;
+            document.getElementById('modalProductImg').alt = product.name;
+            document.getElementById('modalProductCategory').textContent = product.categoryLabel;
+            document.getElementById('modalProductName').textContent = product.name;
+            document.getElementById('modalProductPrice').textContent = formatPrice(product.price);
+            document.getElementById('modalProductDesc').textContent = product.fullDesc;
+            document.getElementById('modalProductNote').value = '';
+            
+            const badgeEl = document.getElementById('modalProductBadge');
+            if (product.badge) {
+                badgeEl.textContent = product.badge;
+                badgeEl.classList.remove('hidden');
+            } else {
+                badgeEl.classList.add('hidden');
+            }
+
+            updateModalSubtotal();
+
+            const modal = document.getElementById('productModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProductModal() {
+            const modal = document.getElementById('productModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+
+        function changeModalQty(delta) {
+            selectedModalQty = Math.max(1, selectedModalQty + delta);
+            updateModalSubtotal();
+        }
+
+        function updateModalSubtotal() {
+            document.getElementById('modalQtyValue').textContent = selectedModalQty;
+            const subtotal = selectedModalProduct.price * selectedModalQty;
+            document.getElementById('modalBtnSubtotal').textContent = formatPrice(subtotal);
+        }
+
+        function confirmAddFromModal() {
+            if (!selectedModalProduct) return;
+            const note = document.getElementById('modalProductNote').value.trim();
+            addToCart(selectedModalProduct, selectedModalQty, note);
+            closeProductModal();
+        }
+
+        // 7. GESTIÓN DEL CARRITO / SELECCIÓN DE MESA
+        function quickAddToCart(productId) {
+            const product = MENU_ITEMS.find(p => p.id === productId);
+            if (product) {
+                addToCart(product, 1, '');
+            }
+        }
+
+        function addToCart(product, qty, note) {
+            // Buscar si ya existe mismo producto con la misma nota
+            const existingIndex = cart.findIndex(item => item.product.id === product.id && item.note === note);
+            if (existingIndex > -1) {
+                cart[existingIndex].qty += qty;
+            } else {
+                cart.push({
+                    uid: Date.now() + Math.random(),
+                    product,
+                    qty,
+                    note
+                });
+            }
+            updateFloatingBar();
+            showToast(`+ ${qty} ${product.name}`);
+        }
+
+        function updateCartItemQty(uid, delta) {
+            const index = cart.findIndex(item => item.uid === uid);
+            if (index === -1) return;
+
+            cart[index].qty += delta;
+            if (cart[index].qty <= 0) {
+                cart.splice(index, 1);
+            }
+            updateFloatingBar();
+            renderOrderSummaryList();
+            if (cart.length === 0) {
+                closeOrderSummaryModal();
+            }
+        }
+
+        function clearOrder() {
+            cart = [];
+            updateFloatingBar();
+            closeOrderSummaryModal();
+        }
+
+        function updateFloatingBar() {
+            const bar = document.getElementById('floatingOrderBar');
+            const totalItems = cart.reduce((acc, item) => acc + item.qty, 0);
+            const totalPrice = cart.reduce((acc, item) => acc + (item.product.price * item.qty), 0);
+
+            document.getElementById('orderTotalCount').textContent = totalItems;
+            document.getElementById('orderTotalPrice').textContent = formatPrice(totalPrice);
+
+            if (totalItems > 0) {
+                bar.classList.remove('translate-y-28', 'opacity-0', 'pointer-events-none');
+                bar.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
+            } else {
+                bar.classList.add('translate-y-28', 'opacity-0', 'pointer-events-none');
+                bar.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
+            }
+        }
+
+        // 8. MODAL DE RESUMEN Y WHATSAPP
+        function openOrderSummaryModal() {
+            renderOrderSummaryList();
+            const modal = document.getElementById('orderSummaryModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeOrderSummaryModal() {
+            const modal = document.getElementById('orderSummaryModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+
+        function renderOrderSummaryList() {
+            const listEl = document.getElementById('orderItemsList');
+            const totalEl = document.getElementById('summaryModalTotal');
+
+            const totalPrice = cart.reduce((acc, item) => acc + (item.product.price * item.qty), 0);
+            totalEl.textContent = formatPrice(totalPrice);
+
+            listEl.innerHTML = cart.map(item => `
+                <div class="bg-white p-3.5 rounded-2xl border border-mythos-border flex items-center justify-between gap-3">
+                    <div class="min-w-0 flex-1">
+                        <p class="font-serif font-bold text-base text-mythos-navy truncate">${item.product.name}</p>
+                        ${item.note ? `<p class="text-[11px] text-mythos-gold italic truncate">Nota: ${item.note}</p>` : ''}
+                        <p class="text-xs font-semibold text-mythos-navy/70 mt-0.5">${formatPrice(item.product.price * item.qty)}</p>
+                    </div>
+
+                    <div class="flex items-center bg-mythos-cream rounded-xl border border-mythos-border p-0.5 shrink-0">
+                        <button onclick="updateCartItemQty(${item.uid}, -1)" class="w-7 h-7 rounded-lg flex items-center justify-center text-mythos-navy font-bold hover:bg-white transition">-</button>
+                        <span class="w-7 text-center text-xs font-bold text-mythos-navy">${item.qty}</span>
+                        <button onclick="updateCartItemQty(${item.uid}, 1)" class="w-7 h-7 rounded-lg flex items-center justify-center text-mythos-navy font-bold hover:bg-white transition">+</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function sendOrderViaWhatsApp() {
+            if (cart.length === 0) return;
+
+            let message = "Hola *Mythos Café & Bodega*! 👋 Quisiera hacer el siguiente pedido desde el menú QR:\n\n";
+            cart.forEach(item => {
+                message += `• ${item.qty}x *${item.product.name}* (${formatPrice(item.product.price * item.qty)})`;
+                if (item.note) {
+                    message += ` _[${item.note}]_`;
+                }
+                message += "\n";
+            });
+
+            const totalPrice = cart.reduce((acc, item) => acc + (item.product.price * item.qty), 0);
+            message += `\n*Total estimado:* ${formatPrice(totalPrice)}`;
+
+            // Número de ejemplo de Quimilí (3843) - listo para reemplazar por el teléfono real del local
+            const whatsappUrl = `https://wa.me/5493843000000?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+        }
+
+        // Toast visual discreto
+        let toastTimeout;
+        function showToast(text) {
+            const toast = document.getElementById('toastNotification');
+            toast.textContent = text;
+            toast.classList.remove('opacity-0', '-translate-y-4');
+            toast.classList.add('opacity-100', 'translate-y-0');
+
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.add('opacity-0', '-translate-y-4');
+                toast.classList.remove('opacity-100', 'translate-y-0');
+            }, 1800);
+        }
+
+        // Cerrar modales al hacer clic fuera del cuadro
+        document.getElementById('productModal').addEventListener('click', (e) => {
+            if (e.target.id === 'productModal') closeProductModal();
+        });
+        document.getElementById('orderSummaryModal').addEventListener('click', (e) => {
+            if (e.target.id === 'orderSummaryModal') closeOrderSummaryModal();
+        });
+
+        // Inicializar aplicación
+        window.addEventListener('DOMContentLoaded', () => {
+            renderCategoryTabs();
+            renderMenu();
+        });
+    </script>
+</body>
+</html>
